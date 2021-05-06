@@ -1,13 +1,14 @@
 import React from "react";
-import MbBackground from "./../assets/mb.jpg"
 
 function App(){
     return (
-        <div style={{
-            backgroundImage: `url(${MbBackground})`
-        }}>
-            Test
+        <div>
+            <header className="App-header">
+
+            </header>
         </div>
+
+
     );
 }
 
