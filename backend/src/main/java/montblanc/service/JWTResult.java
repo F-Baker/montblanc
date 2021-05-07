@@ -1,44 +1,45 @@
 package montblanc.service;
 
-import montblanc.dto.UserDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 
 public class JWTResult {
 
-    private final String login;
-    private final UserDTO userDTO;
-    private final boolean ok;
+    private String token;
 
-    private JWTResult(String login, UserDTO userDTO, boolean ok) {
-        this.login = login;
-        this.userDTO = userDTO;
-        this.ok = ok;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date generatedAt;
+
+    @Override
+    public String toString() {
+        return "JWTResult{" +
+                "token='" + token + '\'' +
+                ", generatedAt=" + generatedAt +
+                '}';
     }
 
-    public static JWTResult buildFail() {
-        return new JWTResult(null, null, false);
+    public JWTResult() {
     }
 
-    public static JWTResult buildInfo(String login, UserDTO userDTO) {
-        return new JWTResult(login, userDTO, true);
+    public JWTResult(String token, Date generatedAt) {
+        this.token = token;
+        this.generatedAt = generatedAt;
     }
 
-    public String getLogin() {
-        return login;
+    public String getToken() {
+        return token;
     }
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public boolean isOk() {
-        return ok;
+    public Date getGeneratedAt() {
+        return generatedAt;
     }
 
-    public boolean isEmploye() {
-        return userDTO.getRoles().contains("ROLE_EMPLOYE");
-    }
-
-    public boolean isUser() {
-        return userDTO.getRoles().contains("ROLE_USER");
+    public void setGeneratedAt(Date generatedAt) {
+        this.generatedAt = generatedAt;
     }
 }

@@ -19,7 +19,7 @@ public class Role implements Serializable {
     private Set<User> users;
 
     public Role() {
-        users = new HashSet<User>();
+        users = new HashSet<>();
     }
 
     public void addUser(User user) {
