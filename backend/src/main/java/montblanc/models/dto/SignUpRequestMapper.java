@@ -25,6 +25,11 @@ public abstract class SignUpRequestMapper {
     @Mapping(target = "roles", expression = "java(getRoles())")
     @Mapping(target = "password", expression = "java(encode().encode(signUpRequest.getPassword()))")
     public abstract User toModel(SignUpRequest signUpRequest);
+    //todo: remove the mapstruct mapper and create an object User
+    // eg User user = new user
+    // take the expression convert it to an object
+    // need to direct idea to the mapping
+
 
     public BCryptPasswordEncoder encode() {
         return new BCryptPasswordEncoder();

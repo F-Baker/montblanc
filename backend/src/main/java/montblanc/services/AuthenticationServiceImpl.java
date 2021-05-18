@@ -43,6 +43,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(signUpRequestMapper::toModel)
                 .map(userRepository::save)
                 .orElse(null);
+        //generate the token for the email
     }
 
     @Override

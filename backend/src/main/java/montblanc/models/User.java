@@ -1,6 +1,7 @@
 package montblanc.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -36,6 +38,13 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String lastname;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_on")
+    private Date createdOn;
+
+    private Boolean enabled;
+
     @ManyToMany()
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
@@ -45,19 +54,37 @@ public class User implements Serializable {
     private List<Role> roles;
 
     public User() {
+        super();
+        this.enabled = false;
         roles = new ArrayList<>();
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", roles=" + roles +
-                '}';
+
+    public User(Long userId, String email, String password, String firstname, String lastname, Date createdOn, Boolean enabled, List<Role> roles) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.createdOn = createdOn;
+        this.enabled = enabled;
+        this.roles = roles;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<Role> getRoles() {
