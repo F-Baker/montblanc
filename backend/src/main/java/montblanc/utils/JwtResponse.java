@@ -1,4 +1,4 @@
-package montblanc.services;
+package montblanc.utils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

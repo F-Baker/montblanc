@@ -1,10 +1,9 @@
-package montblanc.services;
+package montblanc.utils;
 
-import montblanc.models.User;
+import montblanc.entities.User;
 import montblanc.repositories.UserRepository;
 import static montblanc.security.SecurityConstants.EXPIRATION_TIME;
 import static montblanc.security.SecurityConstants.SECRET;
-import montblanc.utils.UserDetailsImpl;
 
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;

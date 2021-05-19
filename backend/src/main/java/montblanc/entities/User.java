@@ -1,4 +1,4 @@
-package montblanc.models;
+package montblanc.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,4 +1,4 @@
-package montblanc.config;
+package montblanc.utils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;

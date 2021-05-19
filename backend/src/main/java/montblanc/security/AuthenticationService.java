@@ -1,8 +1,8 @@
-package montblanc.services;
+package montblanc.security;
 
-import montblanc.models.User;
-import montblanc.models.dto.SignInRequest;
-import montblanc.models.dto.SignUpRequest;
+import montblanc.entities.User;
+import montblanc.utils.SignInRequest;
+import montblanc.utils.SignUpRequest;
 import org.springframework.http.ResponseEntity;
 
 public interface AuthenticationService {

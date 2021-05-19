@@ -1,7 +1,7 @@
-package montblanc.config;
+package montblanc.security;
 
 
-import montblanc.services.JwtUtils;
+import montblanc.utils.JwtUtils;
 import montblanc.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

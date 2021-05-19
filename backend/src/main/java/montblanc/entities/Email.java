@@ -1,4 +1,4 @@
-package montblanc.models;
+package montblanc.entities;
 
 import javax.persistence.Entity;
 import java.util.Map;

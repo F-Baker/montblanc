@@ -1,6 +1,6 @@
 package montblanc.exceptions;
 
-import montblanc.config.ApiResponse;
+import montblanc.utils.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;

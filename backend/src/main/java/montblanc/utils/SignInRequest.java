@@ -1,4 +1,4 @@
-package montblanc.models.dto;
+package montblanc.utils;
 
 public class SignInRequest {
 

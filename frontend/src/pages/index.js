@@ -1,14 +1,16 @@
 import React from "react";
+import RouteWrapper from "../routes/RouteWrapper";
+import {Provider} from "react-redux";
+import {store} from "../redux";
+
+
+
 
 function App(){
     return (
-        <div>
-            <header className="App-header">
-
-            </header>
-        </div>
-
-
+        <Provider store={store}>
+            <RouteWrapper/>
+        </Provider>
     );
 }
 

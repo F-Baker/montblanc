@@ -1,6 +1,6 @@
 package montblanc.repositories;
 
-import montblanc.models.Token;
+import montblanc.entities.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TokenRepository extends JpaRepository<Token, Long> {

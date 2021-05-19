@@ -1,8 +1,9 @@
-package montblanc.models.dto;
+package montblanc.dto;
 
-import montblanc.models.Role;
-import montblanc.models.User;
+import montblanc.entities.Role;
+import montblanc.entities.User;
 import montblanc.repositories.RoleRepository;
+import montblanc.utils.SignUpRequest;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

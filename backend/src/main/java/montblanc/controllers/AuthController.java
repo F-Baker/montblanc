@@ -1,11 +1,11 @@
 package montblanc.controllers;
 
 
-import montblanc.models.Email;
-import montblanc.models.Token;
-import montblanc.models.User;
-import montblanc.models.dto.SignInRequest;
-import montblanc.models.dto.SignUpRequest;
+import montblanc.entities.Email;
+import montblanc.entities.Token;
+import montblanc.entities.User;
+import montblanc.utils.SignInRequest;
+import montblanc.utils.SignUpRequest;
 import montblanc.repositories.TokenRepository;
 import montblanc.repositories.UserRepository;
 import montblanc.services.AuthenticationServiceImpl;
@@ -15,11 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

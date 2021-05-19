@@ -1,7 +1,7 @@
 package montblanc.services;
 
-import montblanc.models.User;
-import montblanc.models.dto.UserDTO;
+import montblanc.entities.User;
+import montblanc.dto.UserDTO;
 import montblanc.exceptions.UserNotFoundException;
 import montblanc.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

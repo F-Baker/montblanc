@@ -1,4 +1,4 @@
-package montblanc.models.dto;
+package montblanc.dto;
 
 import java.util.ArrayList;
 import java.util.List;

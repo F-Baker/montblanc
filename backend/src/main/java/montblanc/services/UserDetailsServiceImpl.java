@@ -1,6 +1,6 @@
 package montblanc.services;
 
-import montblanc.models.User;
+import montblanc.entities.User;
 import montblanc.exceptions.UserNotFoundException;
 import montblanc.repositories.UserRepository;
 import montblanc.utils.UserDetailsImpl;

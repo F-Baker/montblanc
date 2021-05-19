@@ -1,4 +1,4 @@
-package montblanc.models.dto;
+package montblanc.utils;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

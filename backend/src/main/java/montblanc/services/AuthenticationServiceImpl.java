@@ -1,11 +1,14 @@
 package montblanc.services;
 
-import montblanc.models.User;
-import montblanc.models.dto.SignInRequest;
-import montblanc.models.dto.SignUpRequest;
-import montblanc.models.dto.SignUpRequestMapper;
+import montblanc.entities.User;
+import montblanc.utils.SignInRequest;
+import montblanc.utils.SignUpRequest;
+import montblanc.dto.SignUpRequestMapper;
 import montblanc.exceptions.UserExistsException;
 import montblanc.repositories.UserRepository;
+import montblanc.security.AuthenticationService;
+import montblanc.utils.JwtResponse;
+import montblanc.utils.JwtUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

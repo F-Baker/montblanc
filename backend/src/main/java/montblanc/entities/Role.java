@@ -1,4 +1,4 @@
-package montblanc.models;
+package montblanc.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
