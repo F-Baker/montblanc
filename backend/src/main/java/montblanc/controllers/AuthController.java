@@ -28,11 +28,11 @@ public class AuthController {
     @Autowired
     private TokenRepository tokenRepository;
 
-    @Autowired
-    Email email;
+//    @Autowired
+//    Email email;
 
-    @Autowired
-    EmailService emailService;
+//    @Autowired
+//    EmailService emailService;
 
     private final AuthenticationServiceImpl authenticationServiceImpl;
 
@@ -45,61 +45,61 @@ public class AuthController {
         return authenticationServiceImpl.signIn(request);
     }
 
-    @PostMapping(value = "/signup")
-    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
-        User user = authenticationServiceImpl.signUp(request);
-        Token token = new Token(user);
-
-        /* Préparation de l'email à envoyer pour la confirmation avec jeton */
-        email.setTo(user.getEmail());
-        email.setSubject("BricoPasCher--Inscription à compléter");
-        // Template Thymeleaf pour l'envoie d'email
-        email.setTemplate("email");
-
-        // Variable de contexte url
-        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/";
-
-        // Préparation des variables pour le template thymeleaf
-        Map<String, Object> model = new HashMap<>();
-        model.put("userIdentity",user.getLastname() + " " + user.getFirstname());
-        model.put("appUrl", appUrl);
-        model.put("urlToken", "confirm-account?token=");
-        model.put("token", token.getToken());
-        email.setModel(model);
-        // Envoie d'email
-        emailService.sendEmail();
-
-        // Enregistrement du jeton pour user(one to one) dans la table jetons
-        tokenRepository.save(token);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
-    }
-
-    @RequestMapping("/confirm-account")
-    public String confirmUserAccount(@RequestParam("token") String confirmationToken) {
-        Token token = tokenRepository.findByToken(confirmationToken);
-        String emailMessage = "Default message";
-        if (token != null) {
-            User user = userRepository.findByEmail(token.getUser().getEmail());
-            if (user.getCreatedOn() == null) {
-                user.setEnabled(true);
-//                user.setCreatedOn(new Date());
-//                userRepository.updateUser(user);
-                emailMessage = "registration successful";
-//                modelAndView.addObject("registerDone", "message de succès");
-//                modelAndView.setViewName("users/public/login");
-            } else {
-
-//                modelAndView.addObject("badLink", "message d'échec");
-//                modelAndView.setViewName("users/public/login");
-            }
-        } else {
-//            modelAndView.addObject("badLink", , "message d'échec");
-//            modelAndView.setViewName("users/public/login");
-        }
-
-        return emailMessage;
-    }
+//    @PostMapping(value = "/signup")
+//    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
+//        User user = authenticationServiceImpl.signUp(request);
+//        Token token = new Token(user);
+//
+//        /* Préparation de l'email à envoyer pour la confirmation avec jeton */
+//        email.setTo(user.getEmail());
+//        email.setSubject("BricoPasCher--Inscription à compléter");
+//        // Template Thymeleaf pour l'envoie d'email
+//        email.setTemplate("email");
+//
+//        // Variable de contexte url
+//        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/";
+//
+//        // Préparation des variables pour le template thymeleaf
+//        Map<String, Object> model = new HashMap<>();
+//        model.put("userIdentity",user.getLastname() + " " + user.getFirstname());
+//        model.put("appUrl", appUrl);
+//        model.put("urlToken", "confirm-account?token=");
+//        model.put("token", token.getToken());
+//        email.setModel(model);
+//        // Envoie d'email
+//        emailService.sendEmail();
+//
+//        // Enregistrement du jeton pour user(one to one) dans la table jetons
+//        tokenRepository.save(token);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+//    }
+//
+//    @RequestMapping("/confirm-account")
+//    public String confirmUserAccount(@RequestParam("token") String confirmationToken) {
+//        Token token = tokenRepository.findByToken(confirmationToken);
+//        String emailMessage = "Default message";
+//        if (token != null) {
+//            User user = userRepository.findByEmail(token.getUser().getEmail());
+//            if (user.getCreatedOn() == null) {
+//                user.setEnabled(true);
+////                user.setCreatedOn(new Date());
+////                userRepository.updateUser(user);
+//                emailMessage = "registration successful";
+////                modelAndView.addObject("registerDone", "message de succès");
+////                modelAndView.setViewName("users/public/login");
+//            } else {
+//
+////                modelAndView.addObject("badLink", "message d'échec");
+////                modelAndView.setViewName("users/public/login");
+//            }
+//        } else {
+////            modelAndView.addObject("badLink", , "message d'échec");
+////            modelAndView.setViewName("users/public/login");
+//        }
+//
+//        return emailMessage;
+//    }
 
 
 }

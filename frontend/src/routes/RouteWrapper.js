@@ -15,6 +15,10 @@ function RouteWrapper() {
         <Router history={history}>
             <Switch>
 
+                <ScrollIntoView>
+                    <Route path="/mbe/signin" component={Login}/>
+                </ScrollIntoView>
+
                 {role === "ADMIN" && isAuthenticated && (
                     <ScrollIntoView>
                         <Route path="/" component={Home}/>
@@ -35,7 +39,7 @@ function RouteWrapper() {
 
                 {role === "USER" && (
                     <ScrollIntoView>
-                        <Route exact path="/" component={Login}/>
+                        <Route exact path="/mbe/home" component={Home}/>
                     </ScrollIntoView>
                 )}
 

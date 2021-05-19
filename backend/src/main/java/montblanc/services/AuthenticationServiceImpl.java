@@ -38,6 +38,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
+    public ResponseEntity<?> signIn(SignInRequest request) {
+        UsernamePasswordAuthenticationToken authenticationToken
+                = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        return ResponseEntity.ok(new JwtResponse(jwt, new Date()));
+    }
+
+    @Override
     public User signUp(SignUpRequest request) {
         if (userRepository.existByEmail((request.getEmail()))) {
             throw new UserExistsException("This email is already registered.");
@@ -47,15 +57,5 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(userRepository::save)
                 .orElse(null);
         //generate the token for the email
-    }
-
-    @Override
-    public ResponseEntity<?> signIn(SignInRequest request) {
-        UsernamePasswordAuthenticationToken authenticationToken
-                = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt, new Date()));
     }
 }

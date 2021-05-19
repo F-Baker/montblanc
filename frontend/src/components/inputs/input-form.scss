@@ -1,5 +1,14 @@
+//@mixin flex-box($direction: row, $alignItems: none, $justifyContent: none) {
+//  display: flex;
+//  align-items: $alignItems;
+//
+//  flex-direction: $direction;
+//
+//  justify-content: $justifyContent;
+//}
+
 .box_input_form {
-  @include flex-box(column, none, none);
+  //@include flex-box(column, none, none);
 
   label {
     width: auto;
@@ -33,3 +42,4 @@
     }
   }
 }
+

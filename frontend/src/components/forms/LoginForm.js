@@ -34,14 +34,14 @@ function LoginForm() {
     return (
         <div className="form_login">
             <h1>LOG IN</h1>
-            <div className="forget_link">Forgot Your Password?</div>
+            {/*<div className="forget_link">Forgot Your Password?</div>*/}
 
             <InputBox
                 name={"Email"}
                 inputValue={request.email}
                 setInputValue={setEmailValue}
                 InputType={"email"}
-                errorMessage={"Please enter a valid e-mail address"}
+                // errorMessage={"Please enter a valid e-mail address"}
                 labelText={"Email"}
                 required={true}
             />

@@ -1,3 +1,9 @@
+@import "login/login";
+@import "src/components/forms/login-form";
+@import "src/pages/home/home";
+@import "src/components/inputs/input-box.scss";
+@import "src/components/inputs/input-form.scss";
+
 #root {
     width: 100%;
     height: 100em;

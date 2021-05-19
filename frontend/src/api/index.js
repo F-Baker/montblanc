@@ -1,5 +1,5 @@
 import Axios from "axios";
-const httpClient = Axios.create({baseURL: "http://localhost:8080"});
+const httpClient = Axios.create({baseURL: "http://localhost:8080/mbe/"});
 
 httpClient.interceptors.request.use(
     (config) => {
@@ -10,4 +10,4 @@ httpClient.interceptors.request.use(
         Promise.reject(error);
     }
 );
-export default httpClient();
+export default httpClient;

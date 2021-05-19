@@ -11,8 +11,8 @@ function InputBox({ inputValue, setInputValue, InputType, errorMessage, labelTex
             {InputType === 'password' &&
             <div className="hider" onClick={e => { setInputShowText(prev => !prev) }}>
                 {inputShowText ? <>
-                    <BiHide size={25} /><span>Hide</span></> : <>
-                    <BiShow size={25} /><span>Show</span></>}
+                    <BiHide size={25} /></> : <>
+                    <BiShow size={25} /></>}
             </div>}
 
             <div className="input__wrapper">
@@ -28,24 +28,13 @@ function InputBox({ inputValue, setInputValue, InputType, errorMessage, labelTex
                     required={required}
                 />}
 
-                {(InputType !== 'password' && InputType !== 'file') &&
+                {(InputType !== 'password') &&
                 <input
                     type={inputShowText | "text"}
                     value={inputValue}
                     className="input_box__input"
                     name={name | ''}
                     onChange={e => { setInputValue(e.target.value) }}
-                    required={required}
-                />}
-
-                {InputType === 'file' &&
-                <input
-                    accept={acceptFileTypes}
-                    type="file"
-                    value={inputValue}
-                    className="input_box__input"
-                    name={name | ''}
-                    onChange={e => { setInputValue(e.target.files) }}
                     required={required}
                 />}
                 {

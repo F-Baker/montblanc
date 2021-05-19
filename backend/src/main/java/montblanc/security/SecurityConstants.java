@@ -3,9 +3,10 @@ package montblanc.security;
 public class SecurityConstants {
 
     public static final String SECRET =
-            "bXktc2VjcmV0LWtleSBteS1zZ1NyZXQta2V5IG15LXBlY3JldC1rZXkgbXktc2" +
-            "VjcmV0LWtleSBteS1zJWNyZXQta2V5IG15LXNlY3JldC1rHXkgbXktc2VjcmV0LWtl4eSBteS1zZWNyZXQta2V5IG15" +
-            "LXNlY3JldC1rEXkgbXktc2VjcmV0LWtleSBteS1zZWNy6ZXQta2V5";
+            ")J@NcRfUjXn2r4u7x!A%D*G-KaPdSgVkYp3s6v8y/B?E(H+MbQeThWmZq4t"
+                    + "7w!z$C&F)J@NcRfUjXn2r5u8x/A?D*G-KaPdSgVkYp3s6v9y$B&E)H+MbQeThWmZq4t"
+                    + "7w!z%C*F-JaNcRfUjXn2r5u8x/A?D(G+KbPeSgVkYp3s6v9y$B&E)H@McQfTjWmZq4t7w"
+                    + "!z%C*F-JaNdRgUkXp2r5u8x/A?D(G+KbPeShVmYq3t6v9y$B&E)H@McQfTjWn";
 
     public static final int EXPIRATION_TIME = 423_000_000;//5 days
     public static final String TOKEN_PREFIX = "Bearer ";
