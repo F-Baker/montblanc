@@ -37,7 +37,7 @@
         - overrides the initial method
         - enters a try/catch block
         - strips the "bearer " portion from the auth header with parseJwt
-        - parses the token and sets the signin key with SECRET (SecurityConstants)
+        - parses the verificationToken and sets the signin key with SECRET (SecurityConstants)
       
 
 

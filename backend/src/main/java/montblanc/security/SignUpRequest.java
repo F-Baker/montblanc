@@ -1,4 +1,4 @@
-package montblanc.utils;
+package montblanc.security;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,14 +13,19 @@ public class SignUpRequest {
     @NotBlank(message = "error.lastname.required")
     private String lastname;
 
+    private String serverName = "localhost";
+    private String serverPort = "8080";
+
     public SignUpRequest() {
     }
 
-    public SignUpRequest(String email, String password, String firstname, String lastname) {
+    public SignUpRequest(String email, String password, String firstname, String lastname, String serverName, String serverPort) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.serverName = serverName;
+        this.serverPort = serverPort;
     }
 
     @Override
@@ -31,6 +36,14 @@ public class SignUpRequest {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 '}';
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public String getServerPort() {
+        return serverPort;
     }
 
     public String getEmail() {

@@ -1,6 +1,6 @@
-package montblanc.utils;
+package montblanc.security;
 
-import montblanc.entities.User;
+import montblanc.persistence.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class UserDetailsImpl implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
     private static final long   serialVersionUID = 1L;
     private final User user;
 
-    public UserDetailsImpl(User user) {
+    public MyUserDetails(User user) {
         this.user = user;
     }
     @Override
@@ -26,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
     public String getPassword() {
         return user.getPassword();
     }
-    //todo: this might be complicated; I changed some "username"s to "email"s
+
     @Override
     public String getUsername() {
         return user.getEmail();

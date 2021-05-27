@@ -1,6 +1,8 @@
 package montblanc.security;
 
-import montblanc.services.UserDetailsServiceImpl;
+import montblanc.security.jwt.JwtAuthenticationEntryPoint;
+import montblanc.security.jwt.JwtAuthenticationFilter;
+import montblanc.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    MyUserDetailsService userDetailsService;
 
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;

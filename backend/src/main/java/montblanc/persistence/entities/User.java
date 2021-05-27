@@ -1,4 +1,4 @@
-package montblanc.entities;
+package montblanc.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.CreationTimestamp;
@@ -69,6 +69,20 @@ public class User implements Serializable {
         this.createdOn = createdOn;
         this.enabled = enabled;
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", createdOn=" + createdOn +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                '}';
     }
 
     public Date getCreatedOn() {

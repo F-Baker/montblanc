@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Date;
 
-public class ApiResponse {
+public class GenericResponse {
 
     private String message;
     private HttpStatus status;
@@ -13,10 +13,10 @@ public class ApiResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timestamp;
 
-    public ApiResponse() {
+    public GenericResponse() {
     }
 
-    public ApiResponse(String message, HttpStatus status, Date timestamp) {
+    public GenericResponse(String message, HttpStatus status, Date timestamp) {
         this.message = message;
         this.status = status;
         this.timestamp = timestamp;

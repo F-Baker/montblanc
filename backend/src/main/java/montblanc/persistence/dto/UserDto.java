@@ -1,16 +1,20 @@
-package montblanc.dto;
+package montblanc.persistence.dto;
+
+import montblanc.persistence.entities.User;
+import montblanc.security.SignUpRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDTO {
+public class UserDto {
+
     private String email;
+    private String password;
     private String firstname;
     private String lastname;
     private List<String> roles;
-    private String accessToken;
 
-    public UserDTO() {
+    public UserDto() {
         this.roles = new ArrayList<String>();
     }
 
@@ -22,22 +26,6 @@ public class UserDTO {
         this.roles = roles;
     }
 
-    public void addRole(String role) {
-        this.roles.add(role);
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO [email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", roles=" + roles + "]";
-    }
 
     public String getEmail() {
         return email;
@@ -45,6 +33,15 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstname() {
@@ -55,6 +52,7 @@ public class UserDTO {
         this.firstname = firstname;
     }
 
+
     public String getLastname() {
         return lastname;
     }
@@ -62,4 +60,11 @@ public class UserDTO {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO [email=" + email + ", firstname=" + firstname + ", lastname=" + lastname + ", roles=" + roles + "]";
+    }
+
+
 }

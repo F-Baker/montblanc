@@ -1,4 +1,4 @@
-package montblanc.utils;
+package montblanc.security;
 
 public class SignInRequest {
 

@@ -1,4 +1,4 @@
-package montblanc.utils;
+package montblanc.security.jwt;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

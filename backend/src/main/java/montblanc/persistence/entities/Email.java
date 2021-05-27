@@ -1,10 +1,14 @@
-package montblanc.entities;
+package montblanc.persistence.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Map;
 
+//@Entity
 public class Email {
 
+//    @Id
+//    private Long emailId;
     private String template;
     private String attachmentName;
     private String attachmentPath;

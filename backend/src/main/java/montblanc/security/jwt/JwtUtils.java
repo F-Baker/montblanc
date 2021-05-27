@@ -1,13 +1,12 @@
-package montblanc.utils;
+package montblanc.security.jwt;
 
-import montblanc.entities.User;
-import montblanc.repositories.UserRepository;
+import montblanc.persistence.entities.User;
+import montblanc.persistence.repositories.UserRepository;
 import static montblanc.security.SecurityConstants.EXPIRATION_TIME;
 import static montblanc.security.SecurityConstants.SECRET;
 
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import montblanc.security.MyUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +17,6 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    private static final Logger log = LoggerFactory.getLogger(JwtUtils.class);
-
     private final UserRepository userRepository;
 
     public JwtUtils(UserRepository userRepository) {
@@ -27,7 +24,7 @@ public class JwtUtils {
     }
 
     public String generateJwtToken(Authentication authentication) {
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
         User user = userRepository.findByEmail(userDetails.getUsername());
         return Jwts.builder()
                 .setSubject((userDetails.getUsername()))
@@ -52,16 +49,16 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
             return true;
         } catch (SignatureException ex) {
-            log.info("Invalid JWT Signature");
+            System.out.println("Invalid JWT Signature");
         } catch (MalformedJwtException ex) {
-            log.warn("Invalid JWT token");
+            System.out.println("Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-            log.info("Expired JWT token");
+            System.out.println("Expired JWT token");
             httpServletRequest.setAttribute("expired", ex.getMessage());
         } catch (UnsupportedJwtException ex) {
-            log.info("Unsupported JWT exception");
+            System.out.println("Unsupported JWT exception");
         } catch (IllegalArgumentException ex) {
-            log.info("Jwt claims string is empty");
+            System.out.println("Jwt claims string is empty");
         }
         return false;
     }

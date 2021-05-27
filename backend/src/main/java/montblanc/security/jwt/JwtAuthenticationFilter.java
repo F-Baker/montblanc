@@ -1,8 +1,7 @@
-package montblanc.security;
+package montblanc.security.jwt;
 
 
-import montblanc.utils.JwtUtils;
-import montblanc.services.UserDetailsServiceImpl;
+import montblanc.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     JwtUtils jwtUtils;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private MyUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

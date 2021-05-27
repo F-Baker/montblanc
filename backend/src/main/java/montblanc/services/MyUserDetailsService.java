@@ -1,20 +1,20 @@
 package montblanc.services;
 
-import montblanc.entities.User;
+import montblanc.persistence.entities.User;
 import montblanc.exceptions.UserNotFoundException;
-import montblanc.repositories.UserRepository;
-import montblanc.utils.UserDetailsImpl;
+import montblanc.persistence.repositories.UserRepository;
+import montblanc.security.MyUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
     private final UserRepository repository;
 
-    public UserDetailsServiceImpl(UserRepository repository) {
+    public MyUserDetailsService(UserRepository repository) {
         this.repository = repository;
     }
 
@@ -24,6 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UserNotFoundException(email);
         }
-        return new UserDetailsImpl(user);
+        return new MyUserDetails(user);
     }
 }
