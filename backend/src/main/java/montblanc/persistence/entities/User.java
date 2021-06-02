@@ -1,7 +1,6 @@
 package montblanc.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -9,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -38,12 +36,10 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String lastname;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_on")
-    private Date createdOn;
-
     private Boolean enabled;
+
+//    @ManyToOne
+//    private Status status;
 
     @ManyToMany()
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -60,14 +56,14 @@ public class User implements Serializable {
     }
 
 
-    public User(Long userId, String email, String password, String firstname, String lastname, Date createdOn, Boolean enabled, List<Role> roles) {
+    public User(Long userId, String email, String password, String firstname, String lastname, Boolean enabled, List<Role> roles) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.createdOn = createdOn;
         this.enabled = enabled;
+//        this.status = status;
         this.roles = roles;
     }
 
@@ -79,18 +75,9 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", createdOn=" + createdOn +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
                 '}';
-    }
-
-    public Date getCreatedOn() {
-        return createdOn;
-    }
-
-    public void setCreatedOn(Date createdOn) {
-        this.createdOn = createdOn;
     }
 
     public Boolean getEnabled() {

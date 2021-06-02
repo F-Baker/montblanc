@@ -1,0 +1,27 @@
+
+/*.body {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    min-height: 100%;*/
+/*    font-family: 'lato', sans-serif;*/
+/*    color: #000000;*/
+/*}*/
+
+.container {
+
+    background: aliceblue;
+    border: 2px solid cadetblue;
+    /*box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);*/
+    width:66%;
+    display: flex;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1 1 0px;
+    align-items: center;
+
+
+}
+
+

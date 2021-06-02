@@ -29,11 +29,11 @@ public class RegistrationRestController {
     @Autowired
     private VerificationTokenRepository verificationTokenRepository;
 
-    @Autowired
-    Email email;
+//    @Autowired
+//    Email email;
 
-    @Autowired
-    EmailService emailService;
+//    @Autowired
+//    EmailService emailService;
 
     private final AuthenticationServiceImpl authenticationServiceImpl;
 
@@ -46,53 +46,53 @@ public class RegistrationRestController {
         return authenticationServiceImpl.signIn(request);
     }
 
-    @PostMapping(value = "/signup")
-    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
+//    @PostMapping(value = "/signup")
+//    public ResponseEntity<?> signUp(@RequestBody SignUpRequest request) {
+//
+//        User user = authenticationServiceImpl.signUp(request);
+//        VerificationToken verificationToken = new VerificationToken(user);
+//
+//        email.setTo(user.getEmail());
+//        email.setSubject("Please verify your MBE account.");
+//        email.setTemplate("email");
+//
+//        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/";
+//
+//        Map<String, Object> model = new HashMap<>();
+//        model.put("userIdentity",user.getLastname() + " " + user.getFirstname());
+//        model.put("appUrl", appUrl);
+//        model.put("urlToken", "confirm-account?token=");
+//        model.put("token", verificationToken.getToken());
+//        email.setModel(model);
+//        emailService.sendEmail(email.getTo(), email.getSubject(), email.getTemplate());
+//        verificationTokenRepository.save(verificationToken);
+//
+//        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+//    }
 
-        User user = authenticationServiceImpl.signUp(request);
-        VerificationToken verificationToken = new VerificationToken(user);
-
-        email.setTo(user.getEmail());
-        email.setSubject("Please verify your MBE account.");
-        email.setTemplate("email");
-
-        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/";
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("userIdentity",user.getLastname() + " " + user.getFirstname());
-        model.put("appUrl", appUrl);
-        model.put("urlToken", "confirm-account?token=");
-        model.put("token", verificationToken.getToken());
-        email.setModel(model);
-        emailService.sendEmail(email.getTo(), email.getSubject(), email.getTemplate());
-        verificationTokenRepository.save(verificationToken);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
-    }
-
-    @RequestMapping("/confirm-account")
-    public String confirmUserAccount(@RequestParam("token") String confirmationToken) {
-        VerificationToken verificationToken = verificationTokenRepository.findByToken(confirmationToken);
-        String emailMessage = "emailMessage default message";
-        if (verificationToken != null) {
-            User user = userRepository.findByEmail(verificationToken.getUser().getEmail());
-            if (user.getCreatedOn() == null) {
-                user.setEnabled(true);
-//                user.setCreatedOn(new Date());
-//                userRepository.updateUser(user);
-                emailMessage = "registration successful";
-//                modelAndView.addObject("registerDone", "message de succès");
-//                modelAndView.setViewName("users/public/login");
-            } else {
-
-//                modelAndView.addObject("badLink", "message d'échec");
-//                modelAndView.setViewName("users/public/login");
-            }
-        } else {
-//            modelAndView.addObject("badLink", , "message d'échec");
-//            modelAndView.setViewName("users/public/login");
-        }
-
-        return emailMessage;
-    }
+//    @RequestMapping("/confirm-account")
+//    public String confirmUserAccount(@RequestParam("token") String confirmationToken) {
+//        VerificationToken verificationToken = verificationTokenRepository.findByToken(confirmationToken);
+//        String emailMessage = "emailMessage default message";
+//        if (verificationToken != null) {
+//            User user = userRepository.findByEmail(verificationToken.getUser().getEmail());
+//            if (user.getCreatedOn() == null) {
+//                user.setEnabled(true);
+////                user.setCreatedOn(new Date());
+////                userRepository.updateUser(user);
+//                emailMessage = "registration successful";
+////                modelAndView.addObject("registerDone", "message de succès");
+////                modelAndView.setViewName("users/public/login");
+//            } else {
+//
+////                modelAndView.addObject("badLink", "message d'échec");
+////                modelAndView.setViewName("users/public/login");
+//            }
+//        } else {
+////            modelAndView.addObject("badLink", , "message d'échec");
+////            modelAndView.setViewName("users/public/login");
+//        }
+//
+//        return emailMessage;
+//    }
 }

@@ -51,17 +51,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 //        return null;
 //    }
 
-    @Override
-    public User signUp(SignUpRequest request) {
-        if (userRepository.existByEmail((request.getEmail()))) {
-            throw new UserAlreadyExistException("This email is already registered.");
-        }
-
-        return Optional.of(request)
-                .map(userDto:: )
-//                .map(signUpRequestMapper::toModel)
-                .map(userRepository::save)
-                .orElse(null);
-//        //generate the token for the email
-    }
+//    @Override
+//    public User signUp(SignUpRequest request) {
+//        if (userRepository.existByEmail((request.getEmail()))) {
+//            throw new UserAlreadyExistException("This email is already registered.");
+//        }
+//
+//        return Optional.of(request)
+//                .map(userDto:: )
+////                .map(signUpRequestMapper::toModel)
+//                .map(userRepository::save)
+//                .orElse(null);
+////        //generate the token for the email
+//    }
 }

@@ -1,41 +1,71 @@
-import httpClient from "../api";
-import {
-    AUTH_RESET,
-    SIGN_IN_FAIL,
-    SIGN_IN_START,
-    SIGN_IN_SUCCESS,
-    SIGN_UP_FAIL,
-    SIGN_UP_START,
-    SIGN_UP_SUCCESS
-} from "../redux/types/AUTH_TYPES";
+import axios from "axios";
 
-export const SignIn = (request) => {
-    return async (dispatch) => {
-        try {
-            dispatch({type: SIGN_IN_START});
-            const {data} = await httpClient.post("/signin", {...request});
+const API_URL = "http://localhost:8080/mbe/";
 
-            dispatch({type: SIGN_IN_SUCCESS, payload: data});
-        } catch (error) {
-            setTimeout(() => {
-                dispatch({type: SIGN_IN_FAIL, payload: error.response});
-            }, 3000);
-        }
-    };
-};
+class AuthService {
 
-export const SignUp = async (request) => {
-    return async (dispatch) => {
-        try {
-            dispatch({type: SIGN_UP_START});
-            const {data} = await httpClient.post("/signup", request);
-            dispatch({type: SIGN_UP_SUCCESS, payload: data});
-        } catch (error) {
-            dispatch({type: SIGN_UP_FAIL, payload: error.response});
-        }
-    };
-};
+    // login service
+    login(username, password) {
+        return axios
+            .post(API_URL + "signin", {
+                username: username,
+                password: password
+            })
+            .then(response => {
+                if (response.data.accessToken) {
+                    localStorage.setItem("user", JSON.stringify(response.data));
+                }
+                return response.data;
+            });
+    }
 
-export const SignOut = (request) => (dispatch) => {
-    dispatch({type: AUTH_RESET});
-};
+    logout() {
+        localStorage.removeItem("user");
+    }
+
+    // User registration service
+    register(username, email, password) {
+        return axios.post(API_URL + "signup", {
+            username,
+            email,
+            password
+        });
+    }
+
+    // Update user data
+    updateUser(user) {
+        return axios
+            .post(API_URL + "signup", {
+                lastname: user.lastname,
+                firstname: user.firstname
+            })
+            .then(response => {
+                if (response.data.accessToken) {
+                    localStorage.setItem("user", JSON.stringify(response.data));
+                }
+                return response.data;
+            });
+    }
+
+    // Create faculty, e.g. "professor"
+    createFaculty(faculty) {
+        return axios
+            .post(API_URL + "signup", {
+                lastname: faculty.lastname,
+                firstname: faculty.firstname
+            })
+            .then(response => {
+                if (response.data.accessToken) {
+                    //todo: verify that this "user" should be "user" and not "faculty"
+                    localStorage.setItem("user", JSON.stringify(response.data));
+                }
+                return response.data;
+            });
+    }
+
+    getCurrentUser() {
+        return JSON.parse(localStorage.getItem('user'));
+    }
+}
+
+export default new AuthService();
