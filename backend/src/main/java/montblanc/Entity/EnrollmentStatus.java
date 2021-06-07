@@ -15,8 +15,8 @@ public class EnrollmentStatus implements Serializable {
     private int enrollmentStatusId;
     private String name;
     
-    @OneToOne( mappedBy = "enrollmentStatus" )
-    private User user;
+//    @OneToOne( mappedBy = "enrollmentStatus" )
+//    private User user;
 
     public int getEnrollmentStatusId() {
 		return enrollmentStatusId;
@@ -34,11 +34,11 @@ public class EnrollmentStatus implements Serializable {
         this.name = name;
     }
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 }
