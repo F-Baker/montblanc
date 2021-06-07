@@ -97,7 +97,7 @@ public class AuthService {
 		email.setTemplate("confirmAccount");
 
 		// Varaible de contexte url
-		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + "/"+request.getContextPath()+"/";
+		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath()+"/";
 
 		// Préparation des variables pour le template thymeleaf
 		Map<String, Object> model = new HashMap<>();

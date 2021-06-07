@@ -19,6 +19,7 @@ const required = value => {
     return value.trim().length > 0;
 };
 const isPassword = value => {
+    //must have a capital, number, one of these @$!%*?&, and be 8 chars long
     return value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 };
 function Copyright() {
