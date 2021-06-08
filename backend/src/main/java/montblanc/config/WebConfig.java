@@ -1,19 +1,42 @@
 package montblanc.config;
 
+import montblanc.filter.JwtTokenAuthFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-/**
- * purpose:
- *   - override the default CORS mapping to add the frontend's address
- */
 @Configuration
-public class WebConfig extends WebMvcConfigurationSupport {
+public class WebConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    JwtTokenAuthFilter jwtTokenAuthFilter;
+
+    @Bean
+    public BCryptPasswordEncoder bcryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
-    protected void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000");
+    protected void configure(HttpSecurity http) throws Exception {
+
+        System.out.println(bcryptPasswordEncoder().encode("ripodb"));
+        http.csrf().disable();
+        http.cors();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.httpBasic().disable();
+        http.formLogin().disable();
+        http.addFilterBefore(jwtTokenAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        http.authorizeRequests()
+                .mvcMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/api/user/**").access("hasRole('ROLE_USER')")
+                .mvcMatchers(HttpMethod.POST, "/api/admin/**").access("hasRole('ROLE_ADMIN')")
+                .mvcMatchers("/api/**").authenticated();
     }
 }

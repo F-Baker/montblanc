@@ -1,20 +1,26 @@
 import React from "react";
 import {Route, Router, Switch} from "react-router";
-import Login from "../pages/login/Login";
+import Signin from "../pages/Signin";
 import {default as history} from "./History";
-import ScrollIntoView from "../hooks/ScrollIntoView";
-// import Home from "../pages/home/Home";
+import Signup from "../pages/Signup";
+import Admin from "../pages/Admin";
+import User from "../pages/User";
+
 
 function RouteWrapper() {
-
     return (
         <Router history={history}>
             <Switch>
-
-                <ScrollIntoView>
-                    <Route path="/mbe/signin" component={Login}/>
-                </ScrollIntoView>
-
+                {/* <ScrollIntoView>
+                    
+                </ScrollIntoView> */}
+                <Route path="/mbe/signin" component={Signin}/>
+                <Route path="/mbe/signup" component={Signup}/>
+                <Route path="/mbe/user" component={User}/>
+                <Route path="/mbe/admin" component={Admin}/>
+                <Route>
+                    <Signin />
+                </Route>
 
             </Switch>
         </Router>

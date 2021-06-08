@@ -56,7 +56,6 @@ class AuthService {
             })
             .then(response => {
                 if (response.data.accessToken) {
-                    //todo: verify that this "user" should be "user" and not "faculty"
                     localStorage.setItem("user", JSON.stringify(response.data));
                 }
                 return response.data;
