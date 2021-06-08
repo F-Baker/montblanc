@@ -1,10 +1,9 @@
 package montblanc.Entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -28,24 +27,29 @@ public class User implements Serializable {
     private String password;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-	private String address;
-	private String postalCode;
-	private String city;
-	private String phoneNumber;
-    
-    @Column(name = "activationDate", columnDefinition = "DATE")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate activationDate;
+    private String address;
 
-	@Column(name = "enabled", nullable = false)
-	private boolean enabled=false;
+    private String city;
+
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "activation_date", columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate activationDate;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = false;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -53,14 +57,14 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-    
+
     @OneToOne(targetEntity = EnrollmentStatus.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "enrollment_status_id", referencedColumnName = "enrollment_status_id")
     private EnrollmentStatus enrollmentStatus;
 
-    @OneToOne( mappedBy = "user" )
+    @OneToOne(mappedBy = "user")
     private Token token;
-    
+
     public User() {
         roles = new HashSet<>();
     }
@@ -97,83 +101,83 @@ public class User implements Serializable {
         this.password = password;
     }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getAddress() {
-		return address;
-	}
+        return address;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getPostalCode() {
-		return postalCode;
-	}
+    public String getPostalCode() {
+        return postalCode;
+    }
 
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
-	}
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-	public LocalDate getActivationDate() {
-		return activationDate;
-	}
+    public LocalDate getActivationDate() {
+        return activationDate;
+    }
 
-	public void setActivationDate(LocalDate activationDate) {
-		this.activationDate = activationDate;
-	}
+    public void setActivationDate(LocalDate activationDate) {
+        this.activationDate = activationDate;
+    }
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-	public EnrollmentStatus getEnrollmentStatus() {
-		return enrollmentStatus;
-	}
+    public EnrollmentStatus getEnrollmentStatus() {
+        return enrollmentStatus;
+    }
 
-	public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
-		this.enrollmentStatus = enrollmentStatus;
-	}
+    public void setEnrollmentStatus(EnrollmentStatus enrollmentStatus) {
+        this.enrollmentStatus = enrollmentStatus;
+    }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", address=" + address + ", postalCode=" + postalCode + ", city=" + city
-				+ ", phoneNumber=" + phoneNumber + ", activationDate=" + activationDate + ", enabled=" + enabled
-				+ ", roles=" + roles + ", enrollmentStatus=" + enrollmentStatus + "]";
-	}
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", address=" + address + ", postalCode=" + postalCode + ", city=" + city
+                + ", phoneNumber=" + phoneNumber + ", activationDate=" + activationDate + ", enabled=" + enabled
+                + ", roles=" + roles + ", enrollmentStatus=" + enrollmentStatus + "]";
+    }
 }

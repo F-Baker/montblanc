@@ -1,80 +1,71 @@
 package montblanc.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
-@Table(name = "tokens")
+@Table(name = "token")
 public class Token {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "tokenId")
-	private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "token_id")
+    private long id;
 
-	@Column(name = "token")
-	private String token;
+    @Column(name = "token_name")
+    private String token;
 
-	@Column(name = "createdDate", columnDefinition = "DATE")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate createdDate;
+    @Column(name = "created_date", columnDefinition = "DATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createdDate;
 
-	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false, name = "userId")
-	private User user;
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false, name = "userId")
+    private User user;
 
-	public Token() {
-		
-	}
-	public Token(User user) {
-		this.user = user;
-		this.token = UUID.randomUUID().toString();
-		this.createdDate = LocalDate.now();
-	}
+    public Token() {
 
-	public long getId() {
-		return id;
-	}
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public Token(User user) {
+        this.user = user;
+        this.token = UUID.randomUUID().toString();
+        this.createdDate = LocalDate.now();
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public LocalDate getCreatedDate() {
-		return createdDate;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public void setCreatedDate(LocalDate createdDate) {
-		this.createdDate = createdDate;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

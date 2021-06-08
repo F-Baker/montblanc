@@ -1,6 +1,5 @@
 package montblanc.filter;
 
-
 import montblanc.service.JWTResult;
 import montblanc.service.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
 
 @Component
 public class JwtTokenAuthFilter extends OncePerRequestFilter {

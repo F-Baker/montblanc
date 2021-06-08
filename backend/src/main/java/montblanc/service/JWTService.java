@@ -55,6 +55,5 @@ public class JWTService {
             e.printStackTrace();
             return JWTResult.buildFail();
         }
-
     }
 }

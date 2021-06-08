@@ -1,26 +1,29 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<title>Activation du compte client</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>MBE</title>
+    <title>Activation du compte client</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MBE</title>
 </head>
 <body
-	style="display: flex; min-height: 100vh; flex-direction: column; background-color: #DCDCDC;">
+        style="display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: #DCDCDC;"
+>
 
-	<article>
-		<p style="margin: 1.5em; font-size: 1.5em;"
-			th:text="${'Bonjour, ' + userIdentity + ' Nous sommes très heureux de vous compter parmi nous.'}"></p>
-	</article>
-	<article>
-		<p style="margin: 1.5em; font-size: 1.5em;">
-			Veuillez cliquez sur ce&nbsp; <a
-				th:href="@{${appUrl} + ${urlToken} + ${token}}">lien</a>&nbsp;pour
-			finaliser l'activation de votre compte.
-		</p>
-	</article>
+<article>
+    <p style="margin: 1.5em; font-size: 1.5em;"
+       th:text="${'Hi ' + userIdentity + '.  You need to confirm your email account before we can complete your registration.'}"></p>
+</article>
+<article>
+    <p style="margin: 1.5em; font-size: 1.5em;">
+        Please click <a
+            th:href="@{${appUrl} + ${urlToken} + ${token}}">here</a>&nbsp;
+    </p>
+</article>
 
 </body>
 </html>
