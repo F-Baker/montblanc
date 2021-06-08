@@ -1,5 +1,5 @@
 import React from 'react';
-import {DataGrid, GridCellParams} from '@material-ui/data-grid';
+import {DataGrid} from '@material-ui/data-grid';
 import Background from '../assets/mb.jpg';
 import PeopleIcon from '@material-ui/icons/People';
 import {
@@ -10,7 +10,6 @@ import {
     Paper,
     Typography,
     withStyles,
-    TextField,
     Dialog,
     DialogActions,
     DialogContent,
