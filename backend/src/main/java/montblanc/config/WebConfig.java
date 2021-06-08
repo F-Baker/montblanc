@@ -24,6 +24,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.csrf().disable();
         http.cors();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -31,10 +32,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().disable();
         http.addFilterBefore(jwtTokenAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests()
-                .mvcMatchers(HttpMethod.POST, "/signin").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/signup").permitAll()
-                .mvcMatchers(HttpMethod.GET, "/user/**").access("hasRole('ROLE_USER')")
-                .mvcMatchers(HttpMethod.POST, "/admin/**").access("hasRole('ROLE_ADMIN')")
-                .mvcMatchers("/**").authenticated();
+                .mvcMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/api/user/**").access("hasRole('ROLE_USER')")
+                .mvcMatchers(HttpMethod.POST, "/api/admin/**").access("hasRole('ROLE_ADMIN')")
+                .mvcMatchers("/api/**").authenticated();
     }
 }

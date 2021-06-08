@@ -73,57 +73,47 @@ public class AuthService {
     }
     @Transactional
 	public void create(User user, HttpServletRequest request, ModelAndView modelAndView) throws RoleNotFoundException, MessagingException {
-		//créer un set
 		Set<Role> roles = new HashSet<>();
-		//récupérer le role avec le libelle "USER" et l'ajouter dans set
 		Role roleUser = roleService.findByName("ROLE_STUDENT");
 		roles.add(roleUser);
 		user.setRoles(roles);
-		//Créer EnrollmentStatus
+
 		EnrollmentStatus es = esRepo.findByName("PENDING");
 		user.setEnrollmentStatus(es);
-
 		userRepo.save(user);
-		
-		//envoyer mail de confirmation
-		// Tous les données sont valides, préparation du jeton de confirmation
+
 		Token token = new Token(user);
-		// Enregistrement du jeton pour user(one to one) dans la table jetons
 		tokenService.createToken(token);
-		/* Préparation de l'email à envoyer pour la confirmation avec jeton */
+
 		email.setTo(user.getEmail());
 		email.setSubject("MBE - confirm your email");
-		// Template Thymeleaf pour l'envoie d'email
 		email.setTemplate("confirmAccount");
 
-		// Varaible de contexte url
 		String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() +request.getContextPath()+"/";
 
-		// Préparation des variables pour le template thymeleaf
 		Map<String, Object> model = new HashMap<>();
 		model.put("userIdentity", user.getLastName() + " " + user.getFirstName());
 		model.put("appUrl", appUrl);
 		model.put("urlToken", "confirm-account?token=");
 		model.put("token", token.getToken());
+
 		email.setModel(model);
-		// Envoie d'email
 		emailService.sendEmail(email);
 	}
 	public void confirmUserAccount(String confirmationToken) throws Exception {
-		System.out.println("confirmUserAccount");
+
 		Token token = tokenService.findByToken(confirmationToken);
+
 		if (token != null) {
 			User user = userRepo.findByEmail(token.getUser().getEmail());
 			if (user.getActivationDate() == null) {
-				// activer le compte utilisateur
 				user.setEnabled(true);
-				// activer la date de création du client
 				user.setActivationDate(LocalDate.now());
 				userRepo.save(user);
 			}
 		} else {
 			System.out.println("confirmUserAccount exception");
-			throw new Exception("Invalid Token !");
+			throw new Exception("Invalid Token!");
 		}
 		
 	}

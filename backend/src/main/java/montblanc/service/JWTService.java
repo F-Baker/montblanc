@@ -39,9 +39,8 @@ public class JWTService {
         try {
             JwtParser parser = Jwts.parserBuilder().setSigningKey(secretKey).build();
             Jws<Claims> parsed = parser.parseClaimsJws(authorization);
-            System.out.println("body : " + parsed.getBody().toString());
             String login = parsed.getBody().getSubject();
-            System.out.println(login);
+//            System.out.println(login);
             System.out.println(parsed.getBody().get("userDTO"));
             Map<String, Object> userMap = (Map<String, Object>) parsed.getBody().get("userDTO");
             UserDTO userDTO = new UserDTO();
