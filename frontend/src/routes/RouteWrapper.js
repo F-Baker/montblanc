@@ -11,17 +11,13 @@ function RouteWrapper() {
     return (
         <Router history={history}>
             <Switch>
-                {/* <ScrollIntoView>
-                    
-                </ScrollIntoView> */}
                 <Route path="/mbe/signin" component={Signin}/>
                 <Route path="/mbe/signup" component={Signup}/>
                 <Route path="/mbe/user" component={User}/>
                 <Route path="/mbe/admin" component={Admin}/>
                 <Route>
-                    <Signin />
+                    <Signin/>
                 </Route>
-
             </Switch>
         </Router>
     );

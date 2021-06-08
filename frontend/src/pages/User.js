@@ -10,15 +10,15 @@ import {Button, Card, CardActions, CardContent, withStyles} from "@material-ui/c
 import UserService from '../services/UserService';
 import AuthService from '../auth/AuthService';
 
-const required = value => {
-    if (!value) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                This is required
-            </div>
-        );
-    }
-};
+// const required = value => {
+//     if (!value) {
+//         return (
+//             <div className="alert alert-danger" role="alert">
+//                 This is required
+//             </div>
+//         );
+//     }
+// };
 
 //inline styling for the page
 const useStyles = theme => ({

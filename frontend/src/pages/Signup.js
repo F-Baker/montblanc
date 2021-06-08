@@ -8,12 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {withStyles} from "@material-ui/core";
 import AuthService from '../auth/AuthService';
 
-import validator, { isEmail } from "validator";
+import validator, {isEmail} from "validator";
 
 const required = value => {
     return value.trim().length > 0;
@@ -22,6 +22,7 @@ const isPassword = value => {
     //must have a capital, number, one of these @$!%*?&, and be 8 chars long
     return value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 };
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -64,7 +65,7 @@ class Signup extends React.Component {
             firstNameErrorText: "",
             lastName: "",
             lastNameErrorText: "",
-            address : "",
+            address: "",
             postalCode: "",
             city: "",
             phoneNumber: "",
@@ -78,61 +79,70 @@ class Signup extends React.Component {
         };
     }
 
-    handleFNameChange = (e)=>{
+    handleFNameChange = (e) => {
         this.setState({
             firstName: e.target.value,
-            firstNameErrorText: required(e.target.value) ? "" : "FirstName is required !",
-        })
-    }
-    handleChange = (e)=>{
+            firstNameErrorText: required(e.target.value) ? "" : "your first name is required!",
+        });
+    };
+
+    handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-        })
-    }
-    handleLNameChange = (e)=>{
+        });
+    };
+
+    handleLNameChange = (e) => {
         this.setState({
             lastName: e.target.value,
-            lastNameErrorText: required(e.target.value) ? "" : "LastName is required !",
+            lastNameErrorText: required(e.target.value) ? "" : "your last name is required!",
         });
-    }
-    handleEmailChange = (e)=>{
+    };
+
+    handleEmailChange = (e) => {
         this.setState({
             email: e.target.value,
-            emailErrorText: isEmail(e.target.value) ? "" : "email is not valid !",
+            emailErrorText: isEmail(e.target.value) ? "" : "please enter a valid email",
         });
-    }
-    handlePasswordChange = (e)=>{
+    };
+
+    handlePasswordChange = (e) => {
         this.setState({
             password: e.target.value,
-            passwordErrorText: isPassword(e.target.value) ? "" : "password is not valid !",
+            passwordErrorText: isPassword(e.target.value) ? "" : "please enter a password with a capital letter, number, and one of these special characters: @$!%*?&",
         });
-    }
-    isValid = (user)=>{
+    };
+
+    isValid = (user) => {
         let valid = true;
-        if(!(required(user.firstName) && required(user.lastName))) valid=false;
-        if(!isEmail(user.email)) valid=false;
-        if(!isPassword(user.password)) valid=false;
+        if (!(required(user.firstName) && required(user.lastName))) valid = false;
+        if (!isEmail(user.email)) valid = false;
+        if (!isPassword(user.password)) valid = false;
         return valid;
-    }
-    handleSignup = (e) =>{
+    };
+
+    handleSignup = (e) => {
         e.preventDefault();
 
         this.setState({
             message: "",
             loading: true
         });
-        const { firstName, lastName, email, password, phoneNumber, address, postalCode, city } = this.state;
+
+        const {firstName, lastName, email, password, phoneNumber, address, postalCode, city} = this.state;
+
         const user = {
             firstName, lastName, email, password, phoneNumber, address, postalCode, city
         };
+
         if (this.isValid(user)) {
             AuthService.register(user).then(
                 (res) => {
                     console.log(res);
                     const location = {
                         pathname: '/login',
-                        state: { fromRegister: true, email: email }
-                      }
+                        state: {fromRegister: true, email: email}
+                    };
                     this.props.history.replace(location);
                 },
                 error => {
@@ -142,16 +152,14 @@ class Signup extends React.Component {
                         if (error.response.status === 400) {
                             resMessage = "Email or password incorrect";
                         }
-                    }
-                    else if (error.request) {
+                    } else if (error.request) {
                         // Request made but no response received
                         console.log(error.message);
-                        resMessage = "Server down";
-                    }
-                    else{
+                        resMessage = "the server might be offline";
+                    } else {
                         // Something happened in setting up the request that triggered an Error
                         console.log(error.message);
-                        resMessage = "Something weird happened with your config";
+                        resMessage = "something weird happened with the configurations";
                     }
                     this.setState({
                         loading: false,
@@ -165,22 +173,28 @@ class Signup extends React.Component {
                 formValid: false
             });
         }
-    }
+    };
+
     render() {
-        const { classes } = this.props;
+
+        const {classes} = this.props;
+
         return (
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <div className={classes.paper}>
+
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon/>
                     </Avatar>
+
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <form className={classes.form} 
-                            noValidate
-                            onSubmit={this.handleSignup}>
+
+                    <form className={classes.form}
+                          noValidate
+                          onSubmit={this.handleSignup}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -195,9 +209,10 @@ class Signup extends React.Component {
                                     label="First Name"
                                     autoFocus
                                     onChange={this.handleFNameChange}
-                                    
+
                                 />
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
@@ -212,6 +227,7 @@ class Signup extends React.Component {
                                     onChange={this.handleLNameChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
@@ -226,6 +242,7 @@ class Signup extends React.Component {
                                     onChange={this.handleEmailChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
@@ -241,6 +258,7 @@ class Signup extends React.Component {
                                     onChange={this.handlePasswordChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="address"
@@ -253,6 +271,7 @@ class Signup extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
@@ -265,6 +284,7 @@ class Signup extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="city"
@@ -277,6 +297,7 @@ class Signup extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     variant="outlined"
@@ -290,6 +311,7 @@ class Signup extends React.Component {
                                 />
                             </Grid>
                         </Grid>
+
                         <Grid item xs={12}>
                             <Button
                                 type="submit"
@@ -300,12 +322,12 @@ class Signup extends React.Component {
                                 disabled={this.state.loading}
                             >
                                 {this.state.loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                    )}
+                                    <span className="spinner-border spinner-border-sm"/>
+                                )}
                                 <span>Sign Up</span>
                             </Button>
                         </Grid>
-                        
+
                         <Grid container justify="flex-end">
                             <Grid item>
                                 <Link href="/mbe/signin" variant="body2">
@@ -316,14 +338,14 @@ class Signup extends React.Component {
                         {!this.state.formValid && (
                             <div className="form-group">
                                 <div className="alert alert-danger" role="alert">
-                                Form contains errors !
+                                    Please correct your information.
                                 </div>
                             </div>
-                            )}
+                        )}
                     </form>
                 </div>
                 <Box mt={5}>
-                    <Copyright />
+                    <Copyright/>
                 </Box>
             </Container>
         );

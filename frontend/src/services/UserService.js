@@ -7,7 +7,7 @@ class UserService {
     // get Students
     getStudentById(email) {
         return axios
-            .get(API_URL + "user?email="+email, { headers: authHeader() });
+            .get(API_URL + "user?email=" + email, {headers: authHeader()});
     }
 }
 

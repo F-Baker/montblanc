@@ -8,20 +8,20 @@ class AdminService {
     // get students
     getStudents() {
         return axios
-            .get(API_URL + "admin/students", { headers: authHeader() });
+            .get(API_URL + "admin/students", {headers: authHeader()});
     }
+
     // get status
     getEnrollmentStatus() {
         return axios
-            .get(API_URL + "admin/enrollment-status", { headers: authHeader() });
+            .get(API_URL + "admin/enrollment-status", {headers: authHeader()});
     }
+
     // change status
     changeStatus(studentId, statusId) {
         return axios
-            .post(API_URL + "admin/students/edit/status", {studentId, statusId}, { headers: authHeader() });
+            .post(API_URL + "admin/students/edit/status", {studentId, statusId}, {headers: authHeader()});
     }
-
-    
 }
 
 export default new AdminService();

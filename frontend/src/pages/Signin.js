@@ -28,7 +28,6 @@ const required = value => {
     }
 };
 
-//neat little bidule for showing the site date
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -85,19 +84,19 @@ class Signin extends React.Component {
         };
     }
 
-    onChangeEmail = (e)=>{
+    onChangeEmail = (e) => {
         this.setState({
             email: e.target.value
         });
-    }
+    };
 
-    onChangePassword = (e)=> {
+    onChangePassword = (e) => {
         this.setState({
             password: e.target.value
         });
-    }
+    };
 
-    handleLogin = (e) =>{
+    handleLogin = (e) => {
         e.preventDefault();
 
         this.setState({
@@ -114,8 +113,7 @@ class Signin extends React.Component {
                     this.props.setCurrentUserCallback(user);
                     if (user.roles.includes("ROLE_ADMIN")) {
                         this.props.history.push("/mbe/admin");
-                    }
-                    else if (user.roles.includes("ROLE_STUDENT")) {
+                    } else if (user.roles.includes("ROLE_STUDENT")) {
                         this.props.history.push("/mbe/user");
                     }
                     // window.location.reload();
@@ -127,16 +125,14 @@ class Signin extends React.Component {
                         if (error.response.status === 400) {
                             resMessage = "Email or password incorrect";
                         }
-                    }
-                    else if (error.request) {
+                    } else if (error.request) {
                         // Request made but no response received
                         console.log(error.message);
-                        resMessage = "Server down";
-                    }
-                    else{
+                        resMessage = "the server might be offline";
+                    } else {
                         // Something happened in setting up the request that triggered an Error
                         console.log(error.message);
-                        resMessage = "Something weird happened with your config";
+                        resMessage = "something weird happened with the configurations";
                     }
                     this.setState({
                         loading: false,
@@ -149,142 +145,143 @@ class Signin extends React.Component {
                 loading: false
             });
         }
+    };
+
+    render() {
+        const {classes} = this.props;
+        return (
+            <Grid container component="main" className={classes.root}>
+                <CssBaseline/>
+                <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <div className={classes.paper}>
+
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon/>
+                        </Avatar>
+
+                        <Typography component="h1" variant="h5">
+                            Sign in
+                        </Typography>
+
+                        <Form
+                            className={classes.form}
+                            onSubmit={this.handleLogin}
+                            ref={c => {
+                                this.form = c;
+                            }}>
+
+                            {/*<TextField*/}
+                            {/*    variant="outlined"*/}
+                            {/*    margin="normal"*/}
+                            {/*    required*/}
+                            {/*    fullWidth*/}
+                            {/*    id="email"*/}
+                            {/*    label="Email Address"*/}
+                            {/*    name="email"*/}
+                            {/*    autoComplete="email"*/}
+                            {/*    autoFocus*/}
+                            {/*    validations={[required]}*/}
+                            {/*/>*/}
+
+                            <div className="form-group">
+                                <label htmlFor="email">email</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.onChangeEmail}
+                                    validations={[required]}
+                                />
+                            </div>
+
+                            {/*<TextField*/}
+                            {/*    variant="outlined"*/}
+                            {/*    margin="normal"*/}
+                            {/*    required*/}
+                            {/*    fullWidth*/}
+                            {/*    name="password"*/}
+                            {/*    label="Password"*/}
+                            {/*    type="password"*/}
+                            {/*    id="password"*/}
+                            {/*    autoComplete="current-password"*/}
+                            {/*/>*/}
+
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <Input
+                                    type="password"
+                                    className="form-control"
+                                    name="password"
+                                    value={this.state.password}
+                                    onChange={this.onChangePassword}
+                                    validations={[required]}
+                                />
+                            </div>
+
+                            {/*<FormControlLabel*/}
+                            {/*    control={<Checkbox value="remember" color="primary"/>}*/}
+                            {/*    label="Remember me"*/}
+                            {/*/>*/}
+
+                            {/*<Button*/}
+                            {/*    type="submit"*/}
+                            {/*    fullWidth*/}
+                            {/*    variant="contained"*/}
+                            {/*    color="primary"*/}
+                            {/*    className={classes.submit}*/}
+                            {/*>*/}
+                            {/*    Sign In*/}
+                            {/*</Button>*/}
+
+                            <div className="form-group">
+                                <button
+                                    className="btn btn-primary btn-block"
+                                    disabled={this.state.loading}
+                                >
+                                    {this.state.loading && (
+                                        <span/>
+                                    )}
+                                    <span>Sign in</span>
+                                </button>
+                            </div>
+
+                            {this.state.message && (
+                                <div className="form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        {this.state.message}
+                                    </div>
+                                </div>
+                            )}
+                            <CheckButton
+                                style={{display: "none"}}
+                                ref={c => {
+                                    this.checkBtn = c;
+                                }}
+                            />
+
+                            <Grid container>
+                                {/*<Grid item xs>*/}
+                                {/*    <Link href="#" variant="body2">*/}
+                                {/*        Forgot password?*/}
+                                {/*    </Link>*/}
+                                {/*</Grid>*/}
+                                <Grid item>
+                                    <Link href="/mbe/signup" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                            <Box mt={5}>
+                                <Copyright/>
+                            </Box>
+                        </Form>
+                    </div>
+                </Grid>
+            </Grid>
+        );
     }
-
-   render() {
-       const { classes } = this.props;
-       return (
-           <Grid container component="main" className={classes.root}>
-               <CssBaseline/>
-               <Grid item xs={false} sm={4} md={7} className={classes.image}/>
-               <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                   <div className={classes.paper}>
-
-                       <Avatar className={classes.avatar}>
-                           <LockOutlinedIcon/>
-                       </Avatar>
-
-                       <Typography component="h1" variant="h5">
-                           Sign in
-                       </Typography>
-
-                       <Form
-                           className={classes.form}
-                           onSubmit={this.handleLogin}
-                           ref={c => {this.form = c;
-                           }}>
-
-                           {/*<TextField*/}
-                           {/*    variant="outlined"*/}
-                           {/*    margin="normal"*/}
-                           {/*    required*/}
-                           {/*    fullWidth*/}
-                           {/*    id="email"*/}
-                           {/*    label="Email Address"*/}
-                           {/*    name="email"*/}
-                           {/*    autoComplete="email"*/}
-                           {/*    autoFocus*/}
-                           {/*    validations={[required]}*/}
-                           {/*/>*/}
-
-                           <div className="form-group">
-                               <label htmlFor="email">email</label>
-                               <Input
-                                   type="text"
-                                   className="form-control"
-                                   name="email"
-                                   value={this.state.email}
-                                   onChange={this.onChangeEmail}
-                                   validations={[required]}
-                               />
-                           </div>
-
-                           {/*<TextField*/}
-                           {/*    variant="outlined"*/}
-                           {/*    margin="normal"*/}
-                           {/*    required*/}
-                           {/*    fullWidth*/}
-                           {/*    name="password"*/}
-                           {/*    label="Password"*/}
-                           {/*    type="password"*/}
-                           {/*    id="password"*/}
-                           {/*    autoComplete="current-password"*/}
-                           {/*/>*/}
-
-                           <div className="form-group">
-                               <label htmlFor="password">Password</label>
-                               <Input
-                                   type="password"
-                                   className="form-control"
-                                   name="password"
-                                   value={this.state.password}
-                                   onChange={this.onChangePassword}
-                                   validations={[required]}
-                               />
-                           </div>
-
-                           {/*<FormControlLabel*/}
-                           {/*    control={<Checkbox value="remember" color="primary"/>}*/}
-                           {/*    label="Remember me"*/}
-                           {/*/>*/}
-
-                           {/*<Button*/}
-                           {/*    type="submit"*/}
-                           {/*    fullWidth*/}
-                           {/*    variant="contained"*/}
-                           {/*    color="primary"*/}
-                           {/*    className={classes.submit}*/}
-                           {/*>*/}
-                           {/*    Sign In*/}
-                           {/*</Button>*/}
-
-                           <div className="form-group">
-                               <button
-                                   className="btn btn-primary btn-block"
-                                   disabled={this.state.loading}
-                               >
-                                   {this.state.loading && (
-                                       <span />
-                                   )}
-                                   <span>Sign in</span>
-                               </button>
-                           </div>
-
-                           {this.state.message && (
-                               <div className="form-group">
-                                   <div className="alert alert-danger" role="alert">
-                                       {this.state.message}
-                                   </div>
-                               </div>
-                           )}
-                           <CheckButton
-                               style={{ display: "none" }}
-                               ref={c => {
-                                   this.checkBtn = c;
-                               }}
-                           />
-
-                           <Grid container>
-                               {/*<Grid item xs>*/}
-                               {/*    <Link href="#" variant="body2">*/}
-                               {/*        Forgot password?*/}
-                               {/*    </Link>*/}
-                               {/*</Grid>*/}
-                               <Grid item>
-                                   <Link href="/mbe/signup" variant="body2">
-                                       {"Don't have an account? Sign Up"}
-                                   </Link>
-                               </Grid>
-                           </Grid>
-                           <Box mt={5}>
-                               <Copyright/>
-                           </Box>
-                       </Form>
-                   </div>
-               </Grid>
-           </Grid>
-       );
-   }
 }
 
 

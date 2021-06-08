@@ -62,11 +62,13 @@ class AuthService {
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
-    isUser(){
-        return this.getCurrentUser() && this.getCurrentUser().roles && this.getCurrentUser().roles.includes("ROLE_STUDENT")
+
+    isUser() {
+        return this.getCurrentUser() && this.getCurrentUser().roles && this.getCurrentUser().roles.includes("ROLE_STUDENT");
     }
-    isAdmin(){
-        return this.getCurrentUser() && this.getCurrentUser().roles && this.getCurrentUser().roles.includes("ROLE_ADMIN")
+
+    isAdmin() {
+        return this.getCurrentUser() && this.getCurrentUser().roles && this.getCurrentUser().roles.includes("ROLE_ADMIN");
     }
 }
 
