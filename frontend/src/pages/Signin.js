@@ -1,8 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-// import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -10,19 +8,19 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Background from '../assets/mb.jpg';
-import {withStyles} from "@material-ui/core";
+import {TextField, withStyles} from "@material-ui/core";
 
 import AuthService from "../auth/AuthService";
 
 import CheckButton from "react-validation/build/button";
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
+import Button from "@material-ui/core/Button";
 
 const required = value => {
     if (!value) {
         return (
-            <div className="alert alert-danger" role="alert">
-                This is required
+            <div className="alert alert-danger" role="alert" id="alert-email-password">
+                Please enter your username and password
             </div>
         );
     }
@@ -150,136 +148,98 @@ class Signin extends React.Component {
     render() {
         const {classes} = this.props;
         return (
-            <Grid container component="main" className={classes.root}>
-                <CssBaseline/>
-                <Grid item xs={false} sm={4} md={7} className={classes.image}/>
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-                    <div className={classes.paper}>
+            <div id="signin-page">
+                <Grid container component="main" className={classes.root}>
+                    <CssBaseline/>
+                    <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                        <div className={classes.paper}>
 
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon/>
-                        </Avatar>
+                            <Avatar className={classes.avatar}>
+                                <LockOutlinedIcon/>
+                            </Avatar>
 
-                        <Typography component="h1" variant="h5">
-                            Sign in
-                        </Typography>
+                            <Typography component="h1" variant="h5">
+                                Sign in
+                            </Typography>
 
-                        <Form
-                            className={classes.form}
-                            onSubmit={this.handleLogin}
-                            ref={c => {
-                                this.form = c;
-                            }}>
+                            <Form
+                                className={classes.form}
+                                onSubmit={this.handleLogin}
+                                ref={c => {
+                                    this.form = c;
+                                }}>
 
-                            {/*<TextField*/}
-                            {/*    variant="outlined"*/}
-                            {/*    margin="normal"*/}
-                            {/*    required*/}
-                            {/*    fullWidth*/}
-                            {/*    id="email"*/}
-                            {/*    label="Email Address"*/}
-                            {/*    name="email"*/}
-                            {/*    autoComplete="email"*/}
-                            {/*    autoFocus*/}
-                            {/*    validations={[required]}*/}
-                            {/*/>*/}
-
-                            <div className="form-group">
-                                <label htmlFor="email">email</label>
-                                <Input
-                                    type="text"
-                                    className="form-control"
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
                                     name="email"
+                                    autoComplete="email"
+                                    autoFocus
                                     value={this.state.email}
                                     onChange={this.onChangeEmail}
                                     validations={[required]}
                                 />
-                            </div>
 
-                            {/*<TextField*/}
-                            {/*    variant="outlined"*/}
-                            {/*    margin="normal"*/}
-                            {/*    required*/}
-                            {/*    fullWidth*/}
-                            {/*    name="password"*/}
-                            {/*    label="Password"*/}
-                            {/*    type="password"*/}
-                            {/*    id="password"*/}
-                            {/*    autoComplete="current-password"*/}
-                            {/*/>*/}
 
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <Input
-                                    type="password"
-                                    className="form-control"
+                                <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    required
+                                    fullWidth
                                     name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
                                     value={this.state.password}
                                     onChange={this.onChangePassword}
                                     validations={[required]}
                                 />
-                            </div>
 
-                            {/*<FormControlLabel*/}
-                            {/*    control={<Checkbox value="remember" color="primary"/>}*/}
-                            {/*    label="Remember me"*/}
-                            {/*/>*/}
-
-                            {/*<Button*/}
-                            {/*    type="submit"*/}
-                            {/*    fullWidth*/}
-                            {/*    variant="contained"*/}
-                            {/*    color="primary"*/}
-                            {/*    className={classes.submit}*/}
-                            {/*>*/}
-                            {/*    Sign In*/}
-                            {/*</Button>*/}
-
-                            <div className="form-group">
-                                <button
-                                    className="btn btn-primary btn-block"
-                                    disabled={this.state.loading}
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
                                 >
-                                    {this.state.loading && (
-                                        <span/>
-                                    )}
-                                    <span>Sign in</span>
-                                </button>
-                            </div>
+                                    Sign In
+                                </Button>
 
-                            {this.state.message && (
-                                <div className="form-group">
-                                    <div className="alert alert-danger" role="alert">
-                                        {this.state.message}
+                                {this.state.message && (
+                                    <div className="form-group">
+                                        <div className="alert alert-danger" role="alert" id="alert">
+                                            {this.state.message}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                            <CheckButton
-                                style={{display: "none"}}
-                                ref={c => {
-                                    this.checkBtn = c;
-                                }}
-                            />
+                                )}
+                                <CheckButton
+                                    style={{display: "none"}}
+                                    ref={c => {
+                                        this.checkBtn = c;
+                                    }}
+                                />
 
-                            <Grid container>
-                                {/*<Grid item xs>*/}
-                                {/*    <Link href="#" variant="body2">*/}
-                                {/*        Forgot password?*/}
-                                {/*    </Link>*/}
-                                {/*</Grid>*/}
-                                <Grid item>
-                                    <Link href="/mbe/signup" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
+                                <Grid container>
+                                    <Grid item>
+                                        <Link href="/mbe/signup" variant="body2">
+                                            {"Don't have an account? Sign Up"}
+                                        </Link>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <Box mt={5}>
-                                <Copyright/>
-                            </Box>
-                        </Form>
-                    </div>
+                                <Box mt={5}>
+                                    <Copyright/>
+                                </Box>
+                            </Form>
+                        </div>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </div>
         );
     }
 }

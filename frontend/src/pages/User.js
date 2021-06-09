@@ -10,17 +10,6 @@ import {Button, Card, CardActions, CardContent, withStyles} from "@material-ui/c
 import UserService from '../services/UserService';
 import AuthService from '../auth/AuthService';
 
-// const required = value => {
-//     if (!value) {
-//         return (
-//             <div className="alert alert-danger" role="alert">
-//                 This is required
-//             </div>
-//         );
-//     }
-// };
-
-//inline styling for the page
 const useStyles = theme => ({
     root: {
         height: '100vh',
@@ -64,66 +53,65 @@ class User extends React.Component {
         this.state = {
             user: {},
             currentUser: {},
-            // loading: false,
-            // message: ""
         };
     }
 
-   render() {
-       const { classes } = this.props;
-       return (
-           <Grid container component="main" className={classes.root}>
-               <CssBaseline/>
-               <Grid item xs={false} sm={4} md={6} className={classes.image}/>
-               <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
-                   <div className={classes.paper}>
-                       <Avatar className={classes.avatar}>
-                           <AccountBoxIcon/>
-                       </Avatar>
-                       <Card className={classes.root} variant="outlined">
-                            <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    My Account
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                {this.state.user.firstName } {this.state.user.lastName}
-                                </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
-                                    Enrollment status : {this.state.user.enrollmentStatus}
-                                </Typography>
-                                <Typography variant="body2" component="p">
-                                    Email : {this.state.user.email}
-                                    <br />
-                                    Phone Number : {this.state.user.phoneNumber}
-                                    <br />
-                                    Address : {this.state.user.address}
-                                    <br />
-                                    Postal Code : {this.state.user.postalCode}
-                                    <br />
-                                    City : {this.state.user.city}
-                                    <br />
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" onClick={this.props.logoutCallback}>logout</Button>
-                            </CardActions>
-                        </Card>
-                   </div>
-               </Grid>
-           </Grid>
-       );
-   }
-   componentDidMount(){
+    render() {
+        const {classes} = this.props;
+        return (
+            <div id="user-page">
+                <Grid container component="main" className={classes.root}>
+                    <CssBaseline/>
+                    <Grid item xs={false} sm={4} md={6} className={classes.image}/>
+                    <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+                        <div className={classes.paper}>
+                            <Avatar className={classes.avatar}>
+                                <AccountBoxIcon/>
+                            </Avatar>
+                            <Card className={classes.root} variant="outlined">
+                                <CardContent>
+                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                        My Account
+                                    </Typography>
+                                    <Typography variant="h5" component="h2">
+                                        {this.state.user.firstName} {this.state.user.lastName}
+                                    </Typography>
+                                    <Typography className={classes.pos} color="textSecondary">
+                                        Enrollment status : {this.state.user.enrollmentStatus}
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        Email : {this.state.user.email}
+                                        <br/>
+                                        Phone Number : {this.state.user.phoneNumber}
+                                        <br/>
+                                        Address : {this.state.user.address}
+                                        <br/>
+                                        Postal Code : {this.state.user.postalCode}
+                                        <br/>
+                                        City : {this.state.user.city}
+                                        <br/>
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small" onClick={this.props.logoutCallback}>logout</Button>
+                                </CardActions>
+                            </Card>
+                        </div>
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    }
+
+    componentDidMount() {
         let currentUser = AuthService.getCurrentUser();
         this.setState({currentUser: currentUser});
-        // console.log(currentUser.email);
-        UserService.getStudentById(currentUser.email).then((res)=>{
-            this.setState({user: res.data})
-        }, (err)=>{
-        console.log(err);
+        UserService.getStudentById(currentUser.email).then((res) => {
+            this.setState({user: res.data});
+        }, (err) => {
+            console.log(err);
         });
     }
 }
-
 
 export default withStyles(useStyles)(User);

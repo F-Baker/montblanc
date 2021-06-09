@@ -7,6 +7,23 @@ import Admin from "./Admin";
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import Signup from "./Signup";
 import {Button, Typography, Link} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+}));
 
 function Copyright() {
     return (
@@ -20,9 +37,22 @@ function Copyright() {
     );
 }
 
-function LogoutButton(props) {
+function Navbar(props) {
+    const classes = useStyles();
     return (
-        <Button size="small" onClick={props.logout}>logout</Button>
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        Menu
+                    </Typography>
+                    <Button color="inherit" onClick={props.logout}>Sign Out</Button>
+                </Toolbar>
+            </AppBar>
+        </div>
     );
 }
 
@@ -49,7 +79,7 @@ export default class App extends React.Component {
             <div>
                 <BrowserRouter>
                     {(AuthService.isUser() || AuthService.isAdmin()) &&
-                    <div style={{textAlign: "right"}}><LogoutButton logout={this.logOut}/></div>}
+                    <div ><Navbar logout={this.logOut}/></div>}
                     <Switch>
                         <Route path="/mbe/signin"
                                render={(props) => (<Signin {...props} setCurrentUserCallback={this.setCurrentUser}/>)}/>
@@ -59,12 +89,8 @@ export default class App extends React.Component {
                         {AuthService.isAdmin() && <Route path="/mbe/admin" render={(props) => (
                             <Admin {...props} logoutCallback={this.logOut}/>)}/>}
                         <Redirect to="/mbe/signin"/>
-                        {/* <Route>
-                            <Signin {...this.props} setCurrentUserCallback={this.setCurrentUser}/>
-                        </Route> */}
                     </Switch>
                     <Copyright/>
-
                 </BrowserRouter>
             </div>
         );

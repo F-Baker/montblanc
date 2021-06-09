@@ -131,53 +131,55 @@ class Admin extends React.Component {
 
         const {classes} = this.props;
         return (
-            <Grid container component="main" className={classes.root}>
-                <CssBaseline/>
-                {/* <Grid item xs={false} sm={4} md={4} className={classes.image}/> */}
-                <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
-                    <div className={classes.paper}>
+            <div id="admin-page">
+                <Grid container component="main" className={classes.root}>
+                    <CssBaseline/>
+                    {/* <Grid item xs={false} sm={4} md={4} className={classes.image}/> */}
+                    <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
+                        <div className={classes.paper}>
 
-                        <Avatar className={classes.avatar}>
-                            <PeopleIcon/>
-                        </Avatar>
+                            <Avatar className={classes.avatar}>
+                                <PeopleIcon/>
+                            </Avatar>
 
-                        <Typography component="h1" variant="h5">
-                            Students List
-                        </Typography>
-                    </div>
-                    <div style={{height: 500, width: '100%'}}>
-                        <DataGrid rows={this.state.users} columns={this.columns()} pageSize={5}/>
-                    </div>
+                            <Typography component="h1" variant="h5">
+                                Students List
+                            </Typography>
+                        </div>
+                        <div style={{height: 500, width: '100%'}}>
+                            <DataGrid rows={this.state.users} columns={this.columns()} pageSize={5}/>
+                        </div>
+                    </Grid>
+                    <Dialog open={this.state.dialogOpen} onClose={this.handleDialogClose}
+                            aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Change Enrollment Status</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Choose Enrollment Status
+                            </DialogContentText>
+                            <FormControl className={classes.formControl}>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={this.state.selectedEnrollId}
+                                    onChange={(event) => this.setState({selectedEnrollId: event.target.value})}
+                                >
+                                    {this.state.statusList.map((status) => (<MenuItem id={status.enrollmentStatusId}
+                                                                                      value={status.enrollmentStatusId}>{status.name}</MenuItem>))}
+                                </Select>
+                            </FormControl>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleDialogClose} color="primary">
+                                Cancel
+                            </Button>
+                            <Button onClick={this.handleEnrollment} color="primary">
+                                Change Enrollment Status
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Grid>
-                <Dialog open={this.state.dialogOpen} onClose={this.handleDialogClose}
-                        aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Change Enrollment Status</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Choose Enrollment Status
-                        </DialogContentText>
-                        <FormControl className={classes.formControl}>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={this.state.selectedEnrollId}
-                                onChange={(event) => this.setState({selectedEnrollId: event.target.value})}
-                            >
-                                {this.state.statusList.map((status) => (<MenuItem id={status.enrollmentStatusId}
-                                                                                  value={status.enrollmentStatusId}>{status.name}</MenuItem>))}
-                            </Select>
-                        </FormControl>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleDialogClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={this.handleEnrollment} color="primary">
-                            Change Enrollment Status
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </Grid>
+            </div>
         );
     }
 

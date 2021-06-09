@@ -175,178 +175,178 @@ class Signup extends React.Component {
     };
 
     render() {
-
         const {classes} = this.props;
-
         return (
-            <Container component="main" maxWidth="xs">
-                <CssBaseline/>
-                <div className={classes.paper}>
+            <div id="signup-page">
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline/>
+                    <div className={classes.paper}>
 
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
+                        <Avatar className={classes.avatar}>
+                            <LockOutlinedIcon/>
+                        </Avatar>
 
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
+                        <Typography component="h1" variant="h5">
+                            Sign up
+                        </Typography>
 
-                    <form className={classes.form}
-                          noValidate
-                          onSubmit={this.handleSignup}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="fname"
-                                    name="firstName"
-                                    variant="outlined"
-                                    error={this.state.firstNameErrorText.length > 0}
-                                    helperText={this.state.firstNameErrorText}
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                    onChange={this.handleFNameChange}
+                        <form className={classes.form}
+                              noValidate
+                              onSubmit={this.handleSignup}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        autoComplete="fname"
+                                        name="firstName"
+                                        variant="outlined"
+                                        error={this.state.firstNameErrorText.length > 0}
+                                        helperText={this.state.firstNameErrorText}
+                                        required
+                                        fullWidth
+                                        id="firstName"
+                                        label="First Name"
+                                        autoFocus
+                                        onChange={this.handleFNameChange}
 
-                                />
-                            </Grid>
+                                    />
+                                </Grid>
 
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    error={this.state.lastNameErrorText.length > 0}
-                                    helperText={this.state.lastNameErrorText}
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="lname"
-                                    onChange={this.handleLNameChange}
-                                />
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        error={this.state.lastNameErrorText.length > 0}
+                                        helperText={this.state.lastNameErrorText}
+                                        id="lastName"
+                                        label="Last Name"
+                                        name="lastName"
+                                        autoComplete="lname"
+                                        onChange={this.handleLNameChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        error={this.state.emailErrorText.length > 0}
+                                        helperText={this.state.emailErrorText}
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        autoComplete="email"
+                                        onChange={this.handleEmailChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        error={this.state.passwordErrorText.length > 0}
+                                        helperText={this.state.passwordErrorText}
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        id="password"
+                                        autoComplete="current-password"
+                                        onChange={this.handlePasswordChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        autoComplete="address"
+                                        name="address"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="address"
+                                        label="Address"
+                                        onChange={this.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="postalCode"
+                                        label="Postal code"
+                                        name="postalCode"
+                                        autoComplete="postalcode"
+                                        onChange={this.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        autoComplete="city"
+                                        name="city"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="city"
+                                        label="City"
+                                        onChange={this.handleChange}
+                                    />
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="phoneNumber"
+                                        label="Phone Number"
+                                        name="phoneNumber"
+                                        autoComplete="phoneNumber"
+                                        onChange={this.handleChange}
+                                    />
+                                </Grid>
                             </Grid>
 
                             <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
+                                <Button
+                                    type="submit"
                                     fullWidth
-                                    error={this.state.emailErrorText.length > 0}
-                                    helperText={this.state.emailErrorText}
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                    onChange={this.handleEmailChange}
-                                />
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                    disabled={this.state.loading}
+                                >
+                                    {this.state.loading && (
+                                        <span className="spinner-border spinner-border-sm"/>
+                                    )}
+                                    <span>Sign Up</span>
+                                </Button>
                             </Grid>
 
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    error={this.state.passwordErrorText.length > 0}
-                                    helperText={this.state.passwordErrorText}
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                    onChange={this.handlePasswordChange}
-                                />
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <Link href="/mbe/signin" variant="body2">
+                                        Already have an account? Sign in
+                                    </Link>
+                                </Grid>
                             </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="address"
-                                    name="address"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="address"
-                                    label="Address"
-                                    onChange={this.handleChange}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="postalCode"
-                                    label="Postal code"
-                                    name="postalCode"
-                                    autoComplete="postalcode"
-                                    onChange={this.handleChange}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="city"
-                                    name="city"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="city"
-                                    label="City"
-                                    onChange={this.handleChange}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="phoneNumber"
-                                    label="Phone Number"
-                                    name="phoneNumber"
-                                    autoComplete="phoneNumber"
-                                    onChange={this.handleChange}
-                                />
-                            </Grid>
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                                disabled={this.state.loading}
-                            >
-                                {this.state.loading && (
-                                    <span className="spinner-border spinner-border-sm"/>
-                                )}
-                                <span>Sign Up</span>
-                            </Button>
-                        </Grid>
-
-                        <Grid container justify="flex-end">
-                            <Grid item>
-                                <Link href="/mbe/signin" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
-                        {!this.state.formValid && (
-                            <div className="form-group">
-                                <div className="alert alert-danger" role="alert">
-                                    Please correct your information.
+                            {!this.state.formValid && (
+                                <div className="form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        Please correct your information.
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </form>
-                </div>
-                <Box mt={5}>
-                    <Copyright/>
-                </Box>
-            </Container>
+                            )}
+                        </form>
+                    </div>
+                    <Box mt={5}>
+                        <Copyright/>
+                    </Box>
+                </Container>
+            </div>
         );
     }
 }
