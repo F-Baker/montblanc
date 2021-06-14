@@ -1,0 +1,65 @@
+Developpeur des composants d'access aux donnees
+    - add an example from something else;
+        - JPQL counts but you must have examples
+    - must have 2 examples
+        - jdbc requests
+        - sql queries
+        
+    - most important 
+        - model a db
+        - create a db
+        
+    - composants d'access aux données
+        - triggers/etc
+        
+tests
+    - Create a detailed used case for each nominal case
+    - postman is accepted
+    - test fonctionnel
+        - all tests must show the functionality of exactly what was specified in the cahier de charges
+        - validation test mean "Validate the requested stuff"
+        
+    - Test the application manually
+        - create a "case de test" ...pour tester x...
+        
+    - test d'integration
+        - "comment un controller communique avec le service"
+        - this is where mockito comes into play
+        
+    - test unitaire
+        - keep it REALLY SIMPLE
+            - no objects
+            
+    - test de non-regression
+    
+    
+    
+** Examples can cover more than one competence **
+
+MConceptDonnees MLogicdonnees MPhysiqueDonnees (entity relationship diagram in UML)
+    - be explain how to transform mcd => mld => mpd
+    
+Développer des composants métier
+    - couche service de app spring
+    - logic metier, sous-composants
+    - validation de donnees
+    - if there is no couche de service, this corresponds avec le controller
+    - Controller/Service
+        - AuthService is a composant metier
+        - if/else stuff
+    
+My app is N-tier
+- this is a facade design pattern
+
+09: TDD/AGILE/KANBAN
+    - methods of project management
+    - used UML
+        - https://en.wikipedia.org/wiki/Rational_Unified_Process
+        
+Diagram de deploiment
+    - https://fr.wikipedia.org/wiki/Diagramme_de_d%C3%A9ploiement
+    
+Développer une interface utilisateur de type desktop
+    - THIS WAS NOT DONE
+    - unless you can throw together an electron app together real fast
+
