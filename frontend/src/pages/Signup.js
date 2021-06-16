@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {withStyles} from "@material-ui/core";
 import AuthService from '../auth/AuthService';
-
 import {isEmail} from "validator";
 
 const required = value => {
