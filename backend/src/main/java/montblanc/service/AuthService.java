@@ -34,8 +34,10 @@ public class AuthService {
 
     @Autowired
     UserRepository userRepo;
+
     @Autowired
     EnrollmentStatusRepository esRepo;
+
     @Autowired
 	private RoleService roleService;
     

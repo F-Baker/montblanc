@@ -83,7 +83,6 @@ public class AuthController {
     }
 
 //	Non-API
-
     private User userRegisterDTOToUser(UserRegisterDTO userRegisterDTO) {
         User user = new User();
         user.setEmail(userRegisterDTO.getEmail());
@@ -96,5 +95,4 @@ public class AuthController {
         user.setPhoneNumber(userRegisterDTO.getPhoneNumber());
         return user;
     }
-
 }
