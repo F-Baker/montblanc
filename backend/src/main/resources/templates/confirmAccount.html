@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Activation du compte client</title>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MBE</title>
+</head>
+<body
+        style="display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        background-color: #DCDCDC;"
+>
+
+<article>
+    <p style="margin: 1.5em; font-size: 1.5em;"
+       th:text="${'Hi ' + userIdentity + '.  You need to confirm your email account before we can complete your registration.'}"></p>
+</article>
+<article>
+    <p style="margin: 1.5em; font-size: 1.5em;">
+        Please click <a
+            th:href="@{${appUrl} + ${urlToken} + ${token}}">here</a>&nbsp;
+    </p>
+</article>
+
+</body>
+</html>
